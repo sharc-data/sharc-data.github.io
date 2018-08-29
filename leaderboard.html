@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ShARC -- Shaping Answers with Rules through Conversation - Data Viewer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mc-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">ShARC Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data.html">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="visualisation.html">Visualisation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                </li>
+                <li class="nav-item" align="right">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://mr.cs.ucl.ac.uk" target="_blank">UCL Machine Reading Group <img
+                            src="img/uclmr_logo_round.png" style="width: 4%; height: 4%" alt=""/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!-- Header -->
+<header class="leaderboard-header">
+
+    <div class="container">
+        <div class="intro-message">
+            <h1>ShARC Leaderboard</h1>
+            <hr class="intro-divider">
+            <ul class="list-inline intro-social-buttons">
+                <li class="list-inline-item">
+                    <!-- <a href="#" class="btn btn-outline-primary btn-lg"> -->
+                    <!-- <a href="#" class="btn btn-secondary btn-lg"> -->
+                    <a href="https://worksheets.codalab.org/worksheets/0xcd87fe339fa2493aac9396a3a27bbae8/"
+                       target="_blank" class="btn btn-info btn-lg">
+                        <span class="paper-name">Codalab Submission Instructions</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="content-section-a">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">The ShARC Leaderboard</h2>
+                <p class="lead">
+                    Currently, we are running a competition on the end to end task of conversational question answering based on ShARC.
+                    Planning to submit a model for the end to end task? Submit your code on <a
+                        href="https://worksheets.codalab.org/worksheets/0xcd87fe339fa2493aac9396a3a27bbae8/"
+                        target="_blank">codalab</a>.
+                    <!--Most work in machine reading focuses on question answering problems where the answer is directly expressed in the text to read. However, many real-world question answering problems require the reading of text not because it contains the literal answer, but because it contains a recipe to derive an answer together with the reader's background knowledge.-->
+                    <!--We formalise this task and develop a crowd-sourcing strategy to collect 37k task instances based.-->
+                <br/><br/>In the future, we will also have competition for subtasks (classification of answer, generating follow-up questions and scenario resolution). Stay tuned!
+                </p>
+
+
+            </div>
+            <div class="col-lg-5 mr-auto">
+                <!--<img class="img-fluid" src="img/task.png" alt="">-->
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</section>
+
+
+<section class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-xl-11 ml-auto"> -->
+            <div class="col-lg-12 ml-auto">
+                <div class="clearfix"></div>
+                <!-- <h2 align="center">Leaderboards</h2> -->
+                <h2 align="center">ShARC - End to End Task</h2>
+                <div class="container">
+                    <div class="row">
+                    <p class="lead">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Model / Reference</th>
+                                <th>Affiliation</th>
+                                <th>Date</th>
+                                <th>Macro Accuracy[%]</th>
+                                <th>Micro Accuracy[%]</th>
+                                <th>BLEU-1</th>
+                                <th>BLEU-2</th>
+                                <th>BLEU-3</th>
+                                <th>BLEU-4</th>
+                            </tr>
+                            </thead>
+                            <tbody class="lead">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Baseline-CM</td>
+                                <td>Bloomsbury AI</td>
+                                <td>May 2018</td>
+                                <td align="right" >61</td>
+                                <td align="right">60</td>
+                                <td align="right">27</td>
+                                <td align="right">23</td>
+                                <td align="right">19</td>
+                                <td align="right">17</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+<!-- CODALAB ribbon -->
+<!-- <div class="corner-ribbon top-right sticky red">New: CodaLab</div> -->
+
+
+</html>

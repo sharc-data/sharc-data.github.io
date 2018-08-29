@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ShARC -- Shaping Answers with Rules through Conversation - Data Viewer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+    <style type="text/css">
+        /*body {*/
+        /*min-width: 320px;*/
+        /*}*/
+
+        /*form {*/
+        /*text-align: center;*/
+        /*}*/
+
+        /*.hidden {*/
+        /*display: none;*/
+        /*}*/
+
+        /*.container {*/
+        /*margin-bottom: 12px;*/
+        /*}*/
+
+        .link {
+            fill: none;
+            opacity: 0.4;
+        }
+
+        #levels {
+            margin-left: 120px;
+        }
+
+        .node circle {
+            fill: #fff;
+            stroke: rgba(100, 100, 100, 1);
+            stroke-width: 1px;
+        }
+
+        .node text {
+            font: 12px sans-serif;
+        }
+
+        .question-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #fff;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 2px solid #1994D5;
+            color: #555;
+            text-align: left;
+            overflow-y: scroll;
+            min-height: 40px;
+            max-height: 480px;
+            margin-bottom: 16px;
+        }
+
+        .code-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #f0f0f0;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 1px solid #062c33;
+            color: #555;
+            text-align: left;
+            /*overflow-y: scroll;*/
+            min-height: 40px;
+            max-height: 600px;
+            margin-bottom: 10px;
+        }
+
+        .scenario-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #F3F3F3;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 2px solid #1994D5;
+            color: #555;
+            text-align: left;
+            overflow-y: scroll;
+            min-height: 40px;
+            max-height: 480px;
+            margin-bottom: 16px;
+        }
+
+        .qa-form {
+            margin-top: 6px;
+        }
+
+        .qa-follow-up-q {
+            max-width: 400px;
+        }
+
+        .instructions-legal-information {
+            margin: 1.5em auto 0 auto;
+            font-size: 0.8em;
+            text-align: justify;
+        }
+
+        .panel {
+            margin-bottom: 16px;
+        }
+
+        .panel-instructions {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        .panel-heading-instructions {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            cursor: pointer;
+        }
+
+        .example-annotation {
+            background-color: rgba(25, 148, 213, 0.3);
+        }
+
+        .font-size-larger {
+            font-size: 18px;
+        }
+
+        .chat-container {
+            display: none;
+            margin-bottom: 6px;
+        }
+
+        .row-margin {
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+        .chat-container-human, .chat-container-validation {
+            text-align: right;
+        }
+
+        .chat-container .bubble {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 6px;
+        }
+
+        .chat-container-system .bubble {
+            background-color: rgba(25, 148, 213, 0.4);
+            border-top-left-radius: 0;
+            margin-right: 16px;
+        }
+
+        .chat-container-system-history .bubble {
+            background-color: rgba(230, 250, 250, 0.4);
+            border: 1px solid rgba(25, 148, 213, 0.8);
+            border-top-left-radius: 0;
+            margin-right: 5px;
+        }
+
+        .chat-container-system-answer .bubble {
+            background-color: rgba(160, 220, 220, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-top-left-radius: 0;
+            margin-right: 5px;
+        }
+
+        .chat-container-human .bubble {
+            background-color: rgba(230, 250, 250, 0.4);
+            border: 1px solid rgba(25, 148, 213, 0.8);
+            border-top-right-radius: 0;
+            margin-left: 5px;
+        }
+
+        .chat-container-validation .bubble {
+            background-color: rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-top-right-radius: 0;
+            margin-left: 16px;
+        }
+
+        .random-answer-text {
+            font-weight: bold;
+        }
+
+        .fieldset-readonly {
+            color: #777;
+        }
+
+        .fieldset-readonly input[type="radio"]:checked, .fieldset-readonly input[type="radio"]:checked + label {
+            opacity: 0.5
+        }
+
+        .input-follow-up-q {
+            min-width: 560px;
+        }
+
+        .validation-label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .validation-initial, .validation-previous {
+            display: none;
+        }
+    </style>
+</head>
+<!--<script src="vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<script type="text/javascript" src="data/sharc1_train.json"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src=mmd.min.js></script>
+
+<body>
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mc-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">ShARC Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data.html">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="visualisation.html">Visualisation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                </li>
+                <li class="nav-item" align="right">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://mr.cs.ucl.ac.uk" target="_blank">UCL Machine Reading Group <img
+                            src="img/uclmr_logo_round.png" style="width: 4%; height: 4%" alt=""/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!-- Header -->
+<header class="viz-header">
+
+    <div class="container">
+        <div class="intro-message">
+            <h1>ShARC</h1>
+            <h3>Shaping Answers with Rules through Conversation</h3>
+            <hr class="intro-divider">
+            <ul class="list-inline intro-social-buttons">
+                <li class="list-inline-item">
+                    <a href="data/sharc1-official.zip" class="btn btn-info btn-lg">
+                        <!--<i class="fa fa-download fa-fw"></i>-->
+                        <span class="dataset-name">Dataset Download</span>
+                    </a>
+                </li>
+            </ul>
+            <h6>Dataset Distribution under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 </a>
+            </h6>
+
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="content-section-a">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 ml-auto">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><a name="data_vis">Data Visualisation</a></h2>
+                <p class="lead">
+                    Data visualiser helps to understand the data by showing an instance in the form of a
+                    conversation.
+                    For an utterance, we also display its corresponding <b>decision tree</b> based on its <i>tree_id</i>.
+                    For a pair of snippet and a question, a decision tree shows all different paths to different
+                    answers,
+                    depending on the user context. <br/><br/>
+                    To view a specific instance, enter an <i>'utterance_id'</i> from an instance in the <i><b>training
+                    data</b></i> and press <b>View</b> or press
+                    <b>I'm Feeling Lucky</b> to display a random
+                    instance.
+                </p>
+                <p class="lead">
+                    <input type="text" placeholder="Enter utterance id ..." name="utterance_id" id="utterance_id"
+                           size="50" class="lead">
+                    <button onclick="show()" class="lead">View</button>
+                    <button onclick="show_random()" class="lead">I'm Feeling Lucky</button>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 row-margin" id="utteranceContainer"></div>
+            <div class="col-md-5 row-margin" id="viz"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5 mr-auto"></div>
+        </div>
+    </div>
+    <hr/>
+    <!-- /.container -->
+</section>
+
+<script>
+    var data_dir = "data/tree_visualiser/tree_data" + "/";
+    var mode = "vertical";
+    var canvas_width = 480;
+    var canvas_height = 640;
+    var margin = {top: 48, right: 0, bottom: 48, left: 0},
+        width = canvas_width - margin.right - margin.left,
+        height = canvas_height - margin.top - margin.bottom;
+
+    var i = 0,
+        duration = 400,// animation duration
+        root;// stores the tree structure in json format
+
+    var tree = d3.layout.tree()
+        .size([height, width]);
+
+    var edge_weight = d3.scale.linear()
+        .domain([0, 20])
+        .range([0, 20]);  // These were 0, 100
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function (d) {
+            if (mode !== "vertical") {
+                return [d.y, d.x];
+            } else {
+                return [d.x, d.y];
+            }
+        });
+
+    // adding the svg to the html structure
+    var x_adjust = 0;
+    if (mode === "vertical") {
+        x_adjust = margin.left + margin.right;
+    }
+    var svg = d3.select("div#viz")
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "" + x_adjust + " 0 " + canvas_width + " " + canvas_height + "")
+        .append("g")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    // Add datasets dropdown
+    d3.csv(data_dir + "data.csv", function (error, data) {
+        d3.select("#datasets")
+            .on("change", function () {
+                if (this.value !== '-') {
+                    d3.json(data_dir + this.value + ".json", load_dataset);
+                }
+            })
+            .selectAll("option")
+            .data(data)
+            .enter().append("option")
+            .attr("value", function (d) {
+                return d.label;
+            })
+            .attr("data-snippet", function (d) {
+                return d.snippet;
+            })
+            .attr("data-scenario", function (d) {
+                return d.scenario;
+            })
+            .text(function (d) {
+                return d.label;
+            });
+
+        // Detect button click
+        d3.selectAll("#datasetsPrevious, #datasetsNext")
+            .on("click", function () {
+                var sel = document.getElementById('datasets');
+                var val = sel.options[sel.selectedIndex].value;
+                if (val !== '-') {
+                    d3.json(data_dir + val + ".json", load_dataset);
+                }
+            });
+
+        // // Detect key down
+        // d3.select("body")
+        //     .on("keydown", function() {
+        //         if (d3.event.keyCode === 37 || d3.event.keyCode === 39) {
+        //             var sel = document.getElementById('datasets');
+        //             var val = sel.options[sel.selectedIndex].value;
+        //             if (val !== '-') {
+        //               d3.json(data_dir + val + ".json", load_dataset);
+        //             }
+        //         }
+        //     });
+
+    });
+
+
+    function load_dataset(json) {
+        // alert(JSON.stringify(json))
+        root = json;
+        root.x0 = 0;
+        root.y0 = 0;
+        update(root);
+    }
+
+
+    d3.select(self.frameElement).style("height", "600px");
+
+    /**
+     * Updates the node.
+     * collapses and expands the node bases on the structure of the source
+     * all 'children' nodes are expanded and '_children' nodes collapsed
+     * @param {json structure} source
+     */
+    function update(source) {
+        // Compute the new tree layout.
+        var nodes = tree.nodes(root).reverse(),
+            links = tree.links(nodes);
+
+        // get tree depth
+        var max_tree_depth = 0;
+        nodes.forEach(function (d) {
+            if (d.depth > max_tree_depth) {
+                max_tree_depth = d.depth;
+            }
+        });
+
+        var this_scaling, this_scaling_x, this_scaling_y = 0;
+        if (max_tree_depth > 3) {
+            this_scaling_x = width / max_tree_depth;
+            this_scaling_y = height / max_tree_depth;
+        } else {
+            this_scaling_x = 380;
+            this_scaling_y = 180;
+        }
+
+        if (mode === "vertical") {
+            this_scaling = this_scaling_y;
+        } else {
+            this_scaling = this_scaling_x;
+        }
+
+        // Normalize for fixed-depth.
+        nodes.forEach(function (d) {
+            d.x = d.x * 0.7;
+            d.y = d.depth * this_scaling; // MAXEDIT: was * 180
+        });
+
+        // Update the nodes
+        var node = svg.selectAll("g.node")
+            .data(nodes, function (d) {
+                return d.id || (d.id = ++i);
+            });
+
+        // Enter any new nodes at the parent's previous position.
+        if (mode !== "vertical") {
+            var nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function (d) {
+                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                })
+                .on("click", click);
+
+            nodeEnter.append("circle")
+                .attr("r", 1e-6)
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                });
+
+            nodeEnter.append("text")
+                .attr("x", function (d) {
+                    return d.children || d._children ? -10 : 10;
+                })
+                .attr("dy", ".35em")
+                .attr("text-anchor", function (d) {
+                    // return d.children || d._children ? "end" : "start";
+                    return "start";
+                })
+                .text(function (d) {
+                    return d.key;
+                })
+                .style("fill-opacity", 1e-6);
+
+            nodeEnter.select("text")
+                .call(wrap, 160);
+
+            // Transition nodes to their new position.
+            var nodeUpdate = node.transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + d.y + "," + d.x + ")";
+                });
+
+            nodeUpdate.select("circle")
+                .attr("r", function (d) {
+                    return edge_weight(d.size / 2);
+                })
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                });
+
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+
+            // Transition exiting nodes to the parent's new position.
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + source.y + "," + source.x + ")";
+                })
+                .remove();
+
+            nodeExit.select("circle")
+                .attr("r", 1e-6);
+
+            nodeExit.select("text")
+                .style("fill-opacity", 1e-6);
+
+        } else {
+            var nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("transform", function (d) {
+                    return "translate(" + source.x0 + "," + source.y0 + ")";
+                })
+                .on("click", click);
+
+            nodeEnter.append("circle")
+                .attr("r", 1e-6)
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                });
+
+            nodeEnter.append("text")
+                .attr("y", function (d) {
+                    return d.children || d._children ? -18 : 18;
+                })
+                .attr("dy", ".35em")
+                .attr("text-anchor", function (d) {
+                    // return d.children || d._children ? "end" : "start";
+                    return "middle";
+                })
+                .text(function (d) {
+                    return d.key;
+                })
+                .style("fill-opacity", 1e-6);
+
+            nodeEnter.select("text")
+                .call(wrap, 160);
+
+
+            // Transition nodes to their new position.
+            var nodeUpdate = node.transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+
+            nodeUpdate.select("circle")
+                .attr("r", function (d) {
+                    return edge_weight(d.size / 2);
+                })
+                .style("fill", function (d) {
+                    return d._children ? "lightsteelblue" : "#fff";
+                });
+
+            nodeUpdate.select("text")
+                .style("fill-opacity", 1);
+
+            // Transition exiting nodes to the parent's new position.
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + source.x + "," + source.y + ")";
+                })
+                .remove();
+
+            nodeExit.select("circle")
+                .attr("r", 1e-6);
+
+            nodeExit.select("text")
+                .style("fill-opacity", 1e-6);
+
+        }
+
+        // Update the links
+        var link = svg.selectAll("path.link")
+            .data(links, function (d) {
+                return d.target.id;
+            });
+
+        // Enter any new links at the parent's previous position.
+        link.enter().insert("path", "g")
+            .attr("class", "link")
+            .attr("stroke-width", function (d) {
+                return 1;
+            })
+            .attr("d", function (d) {
+                var o = {x: source.x0, y: source.y0};
+                return diagonal({source: o, target: o});
+            })
+            .attr("stroke", function (d) {
+                return linkColor(d.target.colorCode);
+            });
+
+        // Transition links to their new position.
+        link.transition()
+            .duration(duration)
+            .attr("d", function (d) {
+                /* calculating the top shift */
+                // var source = {x: d.source.x - edge_weight(calculateLinkSourcePosition(d)), y: d.source.y};
+                var source = {x: d.source.x, y: d.source.y};  // MAXEDIT: removed edge weight factor
+                var target = {x: d.target.x, y: d.target.y};
+                return diagonal({source: source, target: target});
+            })
+            .attr("stroke-width", function (d) {
+                return edge_weight(d.target.size) / 3;  // MAXEDIT: there was no division
+            });
+
+        // Transition exiting nodes to the parent's new position.
+        link.exit().transition()
+            .duration(duration)
+            .attr("d", function (d) {
+                var o = {x: source.x, y: source.y};
+                return diagonal({source: o, target: o});
+            })
+            .remove();
+
+        // Stash the old positions for transition.
+        nodes.forEach(function (d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+        });
+    }
+
+
+    function wrap(text, width) {
+        text.each(function () {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                y = text.attr("y"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
+    }
+
+    /**
+     * Calculates the source y-axis position of the link.
+     * @param {json structure} link
+     */
+    function calculateLinkSourcePosition(link) {
+        targetID = link.target.id;
+        var childrenNumber = link.source.children.length;
+        var widthAbove = 0;
+        for (var i = 0; i < childrenNumber; i++) {
+            if (link.source.children[i].id == targetID) {
+                // we are done
+                widthAbove = widthAbove + link.source.children[i].size / 2;
+                break;
+            } else {
+                // keep adding
+                widthAbove = widthAbove + link.source.children[i].size
+            }
+        }
+        return link.source.size / 2 - widthAbove;
+    }
+
+    /*
+     * Toggle children on click.
+     * @param {node} d
+     */
+    function click(d) {
+        if (d.children) {
+            d._children = d.children;
+            d.children = null;
+        } else {
+            d.children = d._children;
+            d._children = null;
+        }
+        update(d);
+    }
+
+    /*
+     * dictionary of colors corresponding to the different color categories
+     * defaults to a generic blue if there are no defined color categories
+     * in the data set
+    */
+    function linkColor(linkCode) {
+        switch (linkCode) {
+            case 'Yes':
+                return '#008b00';
+            case 'No':
+                return '#8b0000';//orange
+            default:
+                return '#CCCCCC';//generic blue
+        }
+    }
+
+    // $(document).ready(function () {
+    // var select = $('#datasets');
+    // $('#datasetsPrevious').click(function() {
+    //     dataset_switch('prev');
+    // });
+    // $('#datasetsNext').click(function() {
+    //     dataset_switch('next');
+    // });
+    //
+    // $("body").keydown(function(e) {
+    //   if(e.keyCode === 37) {  // left
+    //     dataset_switch('prev');
+    //   }
+    //   else if(e.keyCode === 39) {  // right
+    //     dataset_switch('next');
+    //   }
+    // });
+    //
+    // function dataset_switch(next_prev) {
+    //     var the_selected = select.find('option:selected');
+    //     the_selected.attr('selected', false);
+    //     if (next_prev === 'next') {
+    //         the_selected.next().attr('selected', 'selected');
+    //     } else if (next_prev === 'prev') {
+    //         the_selected.prev().attr('selected', 'selected');
+    //     }
+    //     update_question();
+    // }
+    //
+    // select.change(function () {
+    //     update_question();
+    // });
+    // function update_question() {
+    //     var the_selected = select.find('option:selected');
+    //     $("#questiontxt").html(the_selected.data("snippet"));
+    //     // $("#scenariotxt").html(the_selected.data("scenario"));
+    // }
+    // });
+
+    <!-- end of tree visualisation code -->
+    var mydata;
+
+    function init() {
+        d3.json("data/sharc1_train.json", function (data) {
+            mydata = data
+        });
+    }
+
+    function show_random() {
+        minimum = 0
+        maximum = mydata.length - 1
+        var rand = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+        var uid = mydata[rand]["utterance_id"]
+        var input_uid = document.getElementById("utterance_id")
+        input_uid.value = uid
+        print_data(uid)
+    }
+
+    function show() {
+        var uid = document.getElementById('utterance_id').value
+        print_data(uid)
+    }
+
+    function print_tree(uid) {
+        var viz = d3.select("div#viz")
+        var tree_id = -1
+        for (var i = 0; i < mydata.length; i++) {
+            if (mydata[i].utterance_id == uid) {
+                var d = mydata[i]
+                tree_id = d["tree_id"]
+                // alert(tree_id)
+                break
+            }
+        }
+        if (tree_id == -1) {
+            return
+        }
+        else {
+            d3.json(data_dir + tree_id + ".json", load_dataset)
+        }
+    }
+
+    function print_data(uid) {
+        print_tree(uid)
+
+        var found = 0
+        for (var i = 0; i < mydata.length; i++) {
+            if (mydata[i].utterance_id == uid) {
+                found = 1
+                // alert(JSON.stringify(mydata[i]))
+                var d = mydata[i]
+
+                var div = document.getElementById('utterance');
+                if (div) {
+                    div.parentNode.removeChild(div);
+                }
+                var p = document.getElementById('utteranceContainer');
+                var newElement = document.createElement('utterance_tag');
+                newElement.setAttribute('id', 'utterance');
+                var snippet = d["snippet"].replace('\n', '&#13;&#10;');
+
+                var history_html = '<div title="Conversation History">\n';
+                if (d["history"].length > 0) {
+                    for (var j = 0; j < d["history"].length; j++) {
+                        history_html +=
+                            '                <div class="chat-container chat-container-system-history chat-container-init" style="display: block;">\n' +
+                            '                    <div class="bubble">\n' +
+                            '                        <b>' + d["history"][j]["follow_up_question"] + '</b>\n' +
+                            '                    </div>\n' +
+                            '                </div>\n' +
+                            '                <div class="chat-container chat-container-human chat-container-human-1" style="display: block;">\n' +
+                            '                    <div class="bubble"> ' + d["history"][j]["follow_up_answer"] + '</div>\n' +
+                            '                </div>\n'
+                    }
+                    history_html += '<hr/>'
+                }
+                history_html += '</div>'
+                var scenario = d["scenario"]
+                if (scenario == '') {
+                    scenario = '[Empty Scenario]'
+                }
+
+                var question_html =
+                    '           <div class="question-container" title="Snippet">\n' +
+                    '                <!--<h4><i>Snippet</i></h4>-->\n' +
+                    '                <div class="question-txt" id="questiontxt">' + mmd(d["snippet"]) + '</div>\n' +
+                    '            </div>\n' +
+                    '            <div class="question-container" title="Scenario">\n' +
+                    '                <!--<h4><i>Scenario</i></h4>-->\n' +
+                    '                <div class="scenario-txt" id="scenario">' + scenario +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div title="Question">\n' +
+                    '                <!--<h4><i>Question</i></h4>-->\n' +
+                    '                <div class="question-set-container-init">\n' +
+                    '                    <div class="chat-container chat-container-system chat-container-init" style="display: block;">\n' +
+                    '                        <div class="bubble">\n' +
+                    '                            <b>' + d["question"] + '</b>\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <p></p>\n' +
+                    '            <hr/>\n' +
+                    '            <p></p>\n'
+
+                var ans_html =
+                    '            <div title="Answer">\n' +
+                    '                <!--<h4><i>Answer</i></h4>-->\n' +
+                    '                <div class="chat-container chat-container-system-answer chat-container-human-1" style="display: block;">\n' +
+                    '                    <div class="bubble">' + d["answer"] + '</div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n'
+
+                newElement.innerHTML = '<div> ' + question_html + history_html + ans_html + '</div>'
+                p.appendChild(newElement);
+                return
+            }
+        }
+        if (found == 0) {
+            alert('utterance_id not found!')
+        }
+    }
+
+
+    init();
+
+
+</script>
+
+</body>
+
+
+</html>
+
+

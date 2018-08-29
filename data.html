@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ShARC -- Shaping Answers with Rules through Conversation - Data Viewer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+    <style type="text/css">
+        /*body {*/
+        /*min-width: 320px;*/
+        /*}*/
+
+        /*form {*/
+        /*text-align: center;*/
+        /*}*/
+
+        /*.hidden {*/
+        /*display: none;*/
+        /*}*/
+
+        /*.container {*/
+        /*margin-bottom: 12px;*/
+        /*}*/
+        .node circle {
+            fill: #fff;
+            stroke: rgba(100, 100, 100, 1);
+            stroke-width: 1px;
+        }
+
+        .node text {
+            font: 14px sans-serif;
+        }
+
+        .question-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #fff;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 2px solid #1994D5;
+            color: #555;
+            text-align: left;
+            overflow-y: scroll;
+            min-height: 40px;
+            max-height: 480px;
+            margin-bottom: 16px;
+        }
+
+        .code-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #f0f0f0;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 1px solid #062c33;
+            color: #555;
+            text-align: left;
+            /*overflow-y: scroll;*/
+            min-height: 40px;
+            max-height: 600px;
+            margin-bottom: 10px;
+        }
+
+        .scenario-txt {
+            display: block;
+            padding: 8px 24px;
+            word-wrap: break-word;
+            border-radius: 4px;
+            word-break: normal;
+            font-weight: 400;
+            background-color: #F3F3F3;
+            line-height: 1.5em;
+            font-size: 1em;
+            border: 2px solid #1994D5;
+            color: #555;
+            text-align: left;
+            overflow-y: scroll;
+            min-height: 40px;
+            max-height: 480px;
+            margin-bottom: 16px;
+        }
+
+        .qa-form {
+            margin-top: 6px;
+        }
+
+        .qa-follow-up-q {
+            max-width: 400px;
+        }
+
+        .instructions-legal-information {
+            margin: 1.5em auto 0 auto;
+            font-size: 0.8em;
+            text-align: justify;
+        }
+
+        .panel {
+            margin-bottom: 16px;
+        }
+
+        .panel-instructions {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        .panel-heading-instructions {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+            cursor: pointer;
+        }
+
+        .example-annotation {
+            background-color: rgba(25, 148, 213, 0.3);
+        }
+
+        .font-size-larger {
+            font-size: 18px;
+        }
+
+        .chat-container {
+            display: none;
+            margin-bottom: 6px;
+        }
+
+        .row-margin {
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+        .chat-container-human, .chat-container-validation {
+            text-align: right;
+        }
+
+        .chat-container .bubble {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 6px;
+        }
+
+        .chat-container-system .bubble {
+            background-color: rgba(25, 148, 213, 0.4);
+            border-top-left-radius: 0;
+            margin-right: 16px;
+        }
+
+        .chat-container-system-history .bubble {
+            background-color: rgba(230, 250, 250, 0.4);
+            border: 1px solid rgba(25, 148, 213, 0.8);
+            border-top-left-radius: 0;
+            margin-right: 5px;
+        }
+
+        .chat-container-system-answer .bubble {
+            background-color: rgba(160, 220, 220, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-top-left-radius: 0;
+            margin-right: 5px;
+        }
+
+        .chat-container-human .bubble {
+            background-color: rgba(230, 250, 250, 0.4);
+            border: 1px solid rgba(25, 148, 213, 0.8);
+            border-top-right-radius: 0;
+            margin-left: 5px;
+        }
+
+        .chat-container-validation .bubble {
+            background-color: rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-top-right-radius: 0;
+            margin-left: 16px;
+        }
+
+        .random-answer-text {
+            font-weight: bold;
+        }
+
+        .fieldset-readonly {
+            color: #777;
+        }
+
+        .fieldset-readonly input[type="radio"]:checked, .fieldset-readonly input[type="radio"]:checked + label {
+            opacity: 0.5
+        }
+
+        .input-follow-up-q {
+            min-width: 560px;
+        }
+
+        .validation-label {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .validation-initial, .validation-previous {
+            display: none;
+        }
+    </style>
+</head>
+<!--<script src="vendor/jquery/jquery.min.js"></script>-->
+<!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+<script type="text/javascript" src="data/sharc1_train.json"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src=mmd.min.js></script>
+
+<body>
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mc-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">ShARC Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data.html">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="visualisation.html">Visualisation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                </li>
+                <li class="nav-item" align="right">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://mr.cs.ucl.ac.uk" target="_blank">UCL Machine Reading Group <img
+                            src="img/uclmr_logo_round.png" style="width: 4%; height: 4%" alt=""/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!-- Header -->
+<header class="data-header">
+
+    <div class="container">
+        <div class="intro-message">
+            <h1>ShARC</h1>
+            <h3>Shaping Answers with Rules through Conversation</h3>
+            <hr class="intro-divider">
+            <ul class="list-inline intro-social-buttons">
+                <li class="list-inline-item">
+                    <a href="data/sharc1-official.zip" class="btn btn-info btn-lg">
+                        <!--<i class="fa fa-download fa-fw"></i>-->
+                        <span class="dataset-name">Dataset Download</span>
+                    </a>
+                </li>
+            </ul>
+            <h6>Dataset Distribution under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 </a>
+            </h6>
+
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="content-section-a">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 ml-auto">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Dataset</h2>
+                <p class="lead">
+                    ShARC is a Conversational Question Answering dataset focussing on question answering
+                    from texts containing rules. In order to understand the dataset and the task better, we provide <a
+                        href="#data_explain">explanation</a> and <a href="visualisation.html">visualisation</a> of the
+                    data.
+                </p>
+
+
+            </div>
+            <div class="col-lg-5 mr-auto">
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</section>
+
+<section class="content-section-b">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 ml-auto">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading"><a name="data_explain">Understanding the Data</a></h2>
+
+                <p class="lead">
+                    In this section, we describe all the attributes of an instance in the dataset.
+                </p>
+
+                <hr/>
+                <u><h4 class="section-heading">Attributes: </h4></u>
+                <table border="0" class="lead" valign="top">
+                    <tr>
+                        <th valign="top">utterance_id:</th>
+                        <td>&nbsp;</td>
+                        <td>Unique identification code for an instance in the dataset.</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">tree_id:</th>
+                        <td>&nbsp;</td>
+                        <td>A tree_id specifies a unique combination of a snippet and a question. There could be
+                            several
+                            instances with the same tree_id. This is because ..
+                        </td>
+                    </tr>
+                    <tr>
+                        <th valign="top">source_url:</th>
+                        <td>&nbsp;</td>
+                        <td>The URL of the document containing the rule snippet.</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">snippet:</th>
+                        <td>&nbsp;</td>
+                        <td>Input support document, i.e. often a paragraph which contains some rules.</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">question:</th>
+                        <td>&nbsp;</td>
+                        <td>A question that can or cannot be answered from the snippet.</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">scenario:</th>
+                        <td>&nbsp;</td>
+                        <td>Describes the context of the question.</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">history:</th>
+                        <td>&nbsp;</td>
+                        <td>The conversation history, i.e. a set of follow-up questions and their corresponding
+                            answers.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th valign="top">evidence:</th>
+                        <td>&nbsp;</td>
+                        <td>A list of <i>relevant</i> information that <b>system should extract</b> from the user's
+                            scenario. This information should not be included in the input.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th valign="top">answer:</th>
+                        <td>&nbsp;</td>
+                        <td>The desired output of a prediction model.</td>
+                    </tr>
+                </table>
+                <p></p>
+                <p>NOTE: The input to a system should include <i>snippet, question, scenario and history</i> <b>ONLY</b>. <font color="red">Evidence and answer should not be included in the input to a
+                    prediction model. </font></p>
+                <hr/>
+                <p class="lead">Below, we provide some examples of different types of instances and provide
+                    explanation.</p>
+                <!-- Example 2-->
+                <u><h4 class="section-heading">Example #1</h4></u>
+                <p class="lead">
+                    In this example, user's question is under-specified and therefore an answer can not be provided.
+                    Therefore, the system utterance or the <i>answer</i> is a question.
+                </p>
+                <div class="code-txt">
+                <pre>
+{
+  "utterance_id": "a115eadd97c4857abf76c07dc08bffd4c3b73976",
+  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+  "question": "Can I get Winter Fuel Payment?",
+  "scenario": "",
+  "history": [],
+  "evidence": []
+  "answer": "Do you live in Cyprus?",
+ }</pre>
+                </div>
+                <p></p>
+                <!-- Example 2-->
+                <u><h4 class="section-heading">Example #2</h4></u>
+                <p class="lead">
+                    In this example, user's question is under-specified. However, the conversation history contains
+                    enough information to derive an answer.
+                </p>
+                <div class="code-txt">
+                <pre>
+ {
+  "utterance_id": "dd692dd2648dedb1de063241fc3323bb481d4842",
+  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+  "question": "Can I get Winter Fuel Payment?",
+  "scenario": "",
+  "history": [
+   {
+    "follow_up_question": "Do you live in Cyprus?",
+    "follow_up_answer": "Yes"
+   }
+  "answer": "No"
+}</pre>
+                </div>
+                <p></p>
+                <!-- Example 3-->
+                <u><h4 class="section-heading">Example #3</h4></u>
+                <p class="lead">
+                    In this example, more information is required to answer the question, given the history i.e.
+                    previous system questions and user responses.
+                </p>
+                <div class="code-txt">
+                <pre>
+{
+  "utterance_id": "c8720a4c4314d24b7a2351a172622e6a6002f8ec",
+  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+  "question": "Can I get Winter Fuel Payment?",
+  "scenario": "",
+  "history": [
+   {
+    "follow_up_question": "Do you live in Cyprus?",
+    "follow_up_answer": "No"
+   }
+  ],
+  "evidence": []
+  "answer": "Do you live in France?",
+ }</pre>
+                </div>
+                <!-- Example 4-->
+                <u><h4 class="section-heading">Example #4</h4></u>
+                <p class="lead">
+                    In this example, user's question contains enough context (scenario) to answer the question. The
+                    necessary extracted information (questions and answers) form the evidence.
+
+                </p>
+                <div class="code-txt">
+                <pre>
+ {
+  "utterance_id": "107a420832a89ea5bc62c7d63fce4fd26d7e2ef6",
+  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+  "question": "Can I get Winter Fuel Payment?",
+  "scenario": "I am a 25 year old man from Cyprus that is curious about Winter Fuel Payments. I currently live in Cyprus.",
+  "history": [],
+  "evidence": [
+   {
+    "follow_up_question": "Do you live in Cyprus?",
+    "follow_up_answer": "Yes"
+   }
+  ]
+  "answer": "No",
+ }</pre>
+                </div>
+            </div>
+            <div class="col-lg-5 mr-auto">
+                <!--<img class="img-fluid" src="img/task.png" alt="">-->
+            </div>
+
+
+        </div>
+    </div>
+    <!-- /.container -->
+</section>
+
+</body>
+
+
+</html>
+
+
