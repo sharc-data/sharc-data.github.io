@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ShARC -- Shaping Answers with Rules through Conversation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="css/font.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mc-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">ShARC Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="data.html">Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="visualisation.html">Visualisation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                </li>
+                <li class="nav-item" align="right">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://mr.cs.ucl.ac.uk" target="_blank">UCL Machine Reading Group <img
+                            src="img/uclmr_logo_round.png" style="width: 4%; height: 4%" alt=""/></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<!-- Header -->
+<header class="intro-header">
+
+    <div class="container">
+        <div class="intro-message">
+            <h1>ShARC</h1>
+            <!--<h4>[ˌkæŋɡɚˈruː]</h4>-->
+            <h3>Shaping Answers with Rules through Conversation</h3>
+            <hr class="intro-divider">
+            <ul class="list-inline intro-social-buttons">
+                <li class="list-inline-item">
+                    <!-- <a href="#" class="btn btn-outline-primary btn-lg"> -->
+                    <!-- <a href="#" class="btn btn-secondary btn-lg"> -->
+                    <a href="https://arxiv.org/abs/1809.01494" class="btn btn-info btn-lg", target="_blank">
+                        <!--<i class="fa fa-file-text-o fa-fw"></i>-->
+                        <span class="paper-name">arXiv Paper</span>
+                    </a>
+                </li>
+                <!--<li class="list-inline-item">-->
+                <!--<a href="data/sharc1-official.zip" class="btn btn-info btn-lg">-->
+                <!--&lt;!&ndash;<i class="fa fa-download fa-fw"></i>&ndash;&gt;-->
+                <!--<span class="dataset-name">Dataset Download</span>-->
+                <!--</a>-->
+                <!--</li>-->
+            </ul>
+            <!--<h6>Dataset Distribution under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 </a></h6>-->
+
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="content-section-b">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 ml-auto">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Conversational Question Answering</h2>
+                <p class="lead">
+                    Most work in machine reading focuses on question answering problems where the answer is directly
+                    expressed in the text to read. However, many real-world question answering problems require the
+                    reading of text not because it contains the literal answer, but because it contains a recipe to
+                    derive an answer together with the reader's background knowledge.
+                    We formalise this task and develop a crowd-sourcing strategy to collect 37k task instances.
+                </p>
+
+
+            </div>
+            <div class="col-lg-5 mr-auto">
+                <img class="img-fluid" src="img/task.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</section>
+
+
+<section class="content-section-a">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-11 ml-auto">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Task Overview</h2>
+                <p class="lead">
+                    In our task, the goal is to answer questions by asking follow-up questions.
+                </p>
+
+                <p class="lead">
+                    We assume that the question is underspecified, in the sense that the question often does not provide
+                    enough information to be answered directly.
+                    However, an agent can use the supporting rule text to infer what needs to be asked in order to
+                    determine the final answer. In the example in the figure, a reasonable follow-up question is ``Have
+                    you been working abroad 52 weeks or less?''
+                </p>
+                <p class="lead">
+                    More explanation on the task and the dataset can be found in the <a
+                        href="https://arxiv.org/abs/1809.01494", target="_blank">paper</a>.
+                </p>
+            </div>
+            <div class="col-lg-5 mr-auto ">
+                <img class="img-fluid" src="" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</section>
+
+
+<section class="content-section-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 ml-auto">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Contact </h2>
+                <p class="lead"><u>marzieh.saeidi [at] cs.ucl.ac.uk</u></p>
+                <p class="lead"><u>maxbartolo [at] gmail.com</u></p>
+                <p class="lead"><u>patrick.s.h.lewis [at] gmail.com</u></p>
+                <p class="lead"><u>sebastian.riedel [at] cs.ucl.ac.uk</u></p>
+            </div>
+            <div class="col-lg-5 mr-auto">
+                <img class="img-fluid" src="" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<!--<footer>-->
+<!--</div>-->
+<!--<div class="container" align="right">-->
+<!--<p class="copyright text-muted small">Copyright &copy; Johannes Welbl 2017. </p>-->
+<!--</div>-->
+
+<!--</footer>-->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+<!-- CODALAB ribbon -->
+<!-- <div class="corner-ribbon top-right sticky red">New: CodaLab</div> -->
+
+
+</html>
