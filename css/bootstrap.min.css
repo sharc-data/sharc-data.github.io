@@ -573,7 +573,7 @@ pre {
     display: block;
     margin-top: 0;
     margin-bottom: 1rem;
-    font-size: 85%;
+    font-size: 80%;
     color: #212529
 }
 
@@ -586,7 +586,7 @@ pre code {
 }
 
 .pre-scrollable {
-    max-height: 340px;
+    max-height: 500px;
     overflow-y: scroll
 }
 

@@ -392,17 +392,15 @@
                 </p>
                 <div class="code-txt">
                 <pre>
-{
-  "utterance_id": "a115eadd97c4857abf76c07dc08bffd4c3b73976",
-  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
-  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
-  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
-  "question": "Can I get Winter Fuel Payment?",
-  "scenario": "",
-  "history": [],
-  "evidence": []
-  "answer": "Do you live in Cyprus?",
- }</pre>
+"utterance_id": "a115eadd97c4857abf76c07dc08bffd4c3b73976",
+"tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+"source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+"snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+"question": "Can I get Winter Fuel Payment?",
+"scenario": "",
+"history": [],
+"evidence": []
+"answer": "Do you live in Cyprus?"</pre>
                 </div>
                 <p></p>
                 <!-- Example 2-->
@@ -413,20 +411,19 @@
                 </p>
                 <div class="code-txt">
                 <pre>
- {
-  "utterance_id": "dd692dd2648dedb1de063241fc3323bb481d4842",
-  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
-  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
-  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
-  "question": "Can I get Winter Fuel Payment?",
-  "scenario": "",
-  "history": [
-   {
+"utterance_id": "dd692dd2648dedb1de063241fc3323bb481d4842",
+"tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+"source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+"snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+"question": "Can I get Winter Fuel Payment?",
+"scenario": "",
+"history": [
+  {
     "follow_up_question": "Do you live in Cyprus?",
-    "follow_up_answer": "Yes"
-   }
-  "answer": "No"
-}</pre>
+   "follow_up_answer": "Yes"
+  }
+]
+"answer": "No"</pre>
                 </div>
                 <p></p>
                 <!-- Example 3-->
@@ -437,22 +434,20 @@
                 </p>
                 <div class="code-txt">
                 <pre>
-{
-  "utterance_id": "c8720a4c4314d24b7a2351a172622e6a6002f8ec",
-  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
-  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
-  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
-  "question": "Can I get Winter Fuel Payment?",
-  "scenario": "",
-  "history": [
-   {
+"utterance_id": "c8720a4c4314d24b7a2351a172622e6a6002f8ec",
+"tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+"source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+"snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+"question": "Can I get Winter Fuel Payment?",
+"scenario": "",
+"history": [
+  {
     "follow_up_question": "Do you live in Cyprus?",
     "follow_up_answer": "No"
-   }
-  ],
-  "evidence": []
-  "answer": "Do you live in France?",
- }</pre>
+  }
+],
+"evidence": []
+"answer": "Do you live in France?"</pre>
                 </div>
                 <!-- Example 4-->
                 <u><h4 class="section-heading">Example #4</h4></u>
@@ -463,24 +458,61 @@
                 </p>
                 <div class="code-txt">
                 <pre>
- {
-  "utterance_id": "107a420832a89ea5bc62c7d63fce4fd26d7e2ef6",
-  "tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
-  "source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
-  "snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
-  "question": "Can I get Winter Fuel Payment?",
-  "scenario": "I am a 25 year old man from Cyprus that is curious about Winter Fuel Payments. I currently live in Cyprus.",
-  "history": [],
-  "evidence": [
-   {
+"utterance_id": "107a420832a89ea5bc62c7d63fce4fd26d7e2ef6",
+"tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+"source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+"snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece",
+"question": "Can I get Winter Fuel Payment?",
+"scenario": "I am a 25 year old man from Cyprus and I currently live in Cyprus.",
+"history": [],
+"evidence": [
+  {
     "follow_up_question": "Do you live in Cyprus?",
     "follow_up_answer": "Yes"
-   }
-  ]
-  "answer": "No",
- }</pre>
+  }
+],
+"answer": "No"</pre>
                 </div>
-            </div>
+                <!-- Example 5-->
+                <u><h4 class="section-heading">Example #5</h4></u>
+                <p class="lead">
+                    In this example, the user has only provided a scenario to the <i>operator</i> after answering the two questions in the history.
+                    This is why some of the information that can be inferred from the scenario is not in evidence, but in the history.
+                    This replicates many real world cases where a user may provide relevant but redundant information in a QA conversation.
+
+                </p>
+                <div class="code-txt" style="max-height: 380vh">
+                <pre>
+"utterance_id": "05784a5789aaf4e1ac12293bc16e79c38e9ec40c",
+"tree_id": "9ae3d25b11bc3a4be81f5884371de3b7c145ad48",
+"source_url": "https://www.gov.uk/winter-fuel-payment/eligibility",
+"snippet": "You can't get the payment if you live in Cyprus, France, Gibraltar or Greece.",
+"question": "Can I get Winter Fuel Payment?",
+"scenario": "I want to apply and right now I'm living in the UK.",
+"history": [
+  {
+    "follow_up_question": "Do you live in Cyprus?",
+    "follow_up_answer": "No"
+  },
+  {
+    "follow_up_question": "Do you live in France?",
+    "follow_up_answer": "No"
+  }
+],
+"evidence": [
+  {
+    "follow_up_question": "Do you live in Gibraltar?",
+    "follow_up_answer": "No"
+  },
+  {
+    "follow_up_question": "Do you live in Greece?",
+    "follow_up_answer": "No"
+  }
+],
+"answer": "Yes"</pre>
+                </div>
+                <!-- -->
+
             <div class="col-lg-5 mr-auto">
                 <!--<img class="img-fluid" src="img/task.png" alt="">-->
             </div>
