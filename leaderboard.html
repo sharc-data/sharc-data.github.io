@@ -136,17 +136,27 @@
                             </thead>
                             <tbody class="lead">
                             <tr>
-                                <th scope="row">1</th>
+                                <th class="entry-num" scope="row">#</th>
                                 <td><a href="https://arxiv.org/abs/1906.05373" target="_blank">E3</a></td>
                                 <td>University of Washington</td>
                                 <td>Feb 2019</td>
                                 <td class="text-right font-weight-bold">67.6</td>
                                 <td class="text-right font-weight-bold">73.3</td>
                                 <td class="text-right">54.1</td>
-                                <td class="text-right font-weight-bold">38.7</td>
+                                <td class="text-right">38.7</td>
                             </tr>
                             <tr>
-                                <th scope="row">2</th>
+                                <th class="entry-num" scope="row">#</th>
+                                <td>BiSon (single model)</td>
+                                <td>NEC Laboratories Europe</td>
+                                <td>Aug 2019</td>
+                                <td class="text-right">66.9</td>
+                                <td class="text-right">71.6</td>
+                                <td class="text-right font-weight-bold">58.8</td>
+                                <td class="text-right font-weight-bold">44.3</td>
+                            </tr>
+                            <tr>
+                                <th class="entry-num" scope="row">#</th>
                                 <td><a href="https://arxiv.org/abs/1906.05373" target="_blank">BERT-QA</a></td>
                                 <td>University of Washington</td>
                                 <td>Feb 2019</td>
@@ -156,17 +166,17 @@
                                 <td class="text-right">36.3</td>
                             </tr>
                             <tr>
-                                <th scope="row">3</th>
+                                <th class="entry-num" scope="row">#</th>
                                 <td>Baseline-CM</td>
                                 <td>Bloomsbury AI</td>
                                 <td>May 2018</td>
                                 <td class="text-right">61.9</td>
                                 <td class="text-right">68.9</td>
-                                <td class="text-right font-weight-bold">54.4</td>
+                                <td class="text-right">54.4</td>
                                 <td class="text-right">34.4</td>
                             </tr>
                             <tr>
-                                <th scope="row">4</th>
+                                <th class="entry-num" scope="row">#</th>
                                 <td>Baseline-NMT</td>
                                 <td>Bloomsbury AI</td>
                                 <td>May 2018</td>
@@ -197,5 +207,13 @@
 <!-- CODALAB ribbon -->
 <!-- <div class="corner-ribbon top-right sticky red">New: CodaLab</div> -->
 
+<script>
+$(document).ready(function() {
+    $('.entry_num').each(function(i, val) {
+        $(this).html(i.toString());
+    });
+    $('.entry-num-draw').html('-');
+});
+</script>
 
 </html>
