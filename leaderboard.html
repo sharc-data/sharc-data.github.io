@@ -135,55 +135,55 @@
                             </tr>
                             </thead>
                             <tbody class="lead">
-                            <tr>
+                            <tr class="entry-row">
                                 <th class="entry-num" scope="row">#</th>
                                 <td><a href="https://arxiv.org/abs/1906.05373" target="_blank">E3</a></td>
                                 <td>University of Washington</td>
                                 <td>Feb 2019</td>
-                                <td class="text-right font-weight-bold">67.6</td>
-                                <td class="text-right font-weight-bold">73.3</td>
-                                <td class="text-right">54.1</td>
-                                <td class="text-right">38.7</td>
+                                <td class="micro_acc text-right">67.6</td>
+                                <td class="macro_acc text-right">73.3</td>
+                                <td class="bleu_1 text-right">54.1</td>
+                                <td class="bleu_4 text-right">38.7</td>
                             </tr>
-                            <tr>
+                            <tr class="entry-row">
                                 <th class="entry-num" scope="row">#</th>
                                 <td><a href="https://arxiv.org/abs/1908.05915" target="_blank">BiSon (single model)</a></td>
                                 <td>NEC Laboratories Europe</td>
                                 <td>Aug 2019</td>
-                                <td class="text-right">66.9</td>
-                                <td class="text-right">71.6</td>
-                                <td class="text-right font-weight-bold">58.8</td>
-                                <td class="text-right font-weight-bold">44.3</td>
+                                <td class="micro_acc text-right">66.9</td>
+                                <td class="macro_acc text-right">71.6</td>
+                                <td class="bleu_1 text-right">58.8</td>
+                                <td class="bleu_4 text-right">44.3</td>
                             </tr>
-                            <tr>
+                            <tr class="entry-row">
                                 <th class="entry-num" scope="row">#</th>
                                 <td><a href="https://arxiv.org/abs/1906.05373" target="_blank">BERT-QA</a></td>
                                 <td>University of Washington</td>
                                 <td>Feb 2019</td>
-                                <td class="text-right">63.6</td>
-                                <td class="text-right">70.8</td>
-                                <td class="text-right">46.2</td>
-                                <td class="text-right">36.3</td>
+                                <td class="micro_acc text-right">63.6</td>
+                                <td class="macro_acc text-right">70.8</td>
+                                <td class="bleu_1 text-right">46.2</td>
+                                <td class="bleu_4 text-right">36.3</td>
                             </tr>
-                            <tr>
+                            <tr class="entry-row">
                                 <th class="entry-num" scope="row">#</th>
                                 <td>Baseline-CM</td>
                                 <td>Bloomsbury AI</td>
                                 <td>May 2018</td>
-                                <td class="text-right">61.9</td>
-                                <td class="text-right">68.9</td>
-                                <td class="text-right">54.4</td>
-                                <td class="text-right">34.4</td>
+                                <td class="micro_acc text-right">61.9</td>
+                                <td class="macro_acc text-right">68.9</td>
+                                <td class="bleu_1 text-right">54.4</td>
+                                <td class="bleu_4 text-right">34.4</td>
                             </tr>
-                            <tr>
+                            <tr class="entry-row">
                                 <th class="entry-num" scope="row">#</th>
                                 <td>Baseline-NMT</td>
                                 <td>Bloomsbury AI</td>
                                 <td>May 2018</td>
-                                <td class="text-right" >44.8</td>
-                                <td class="text-right">42.8</td>
-                                <td class="text-right">34.0</td>
-                                <td class="text-right">7.8</td>
+                                <td class="micro_acc text-right" >44.8</td>
+                                <td class="macro_acc text-right">42.8</td>
+                                <td class="bleu_1 text-right">34.0</td>
+                                <td class="bleu_4 text-right">7.8</td>
                             </tr>
                             </tbody>
                         </table>
@@ -209,10 +209,28 @@
 
 <script>
 $(document).ready(function() {
+    // Automatically assign entry numbers
     $('.entry-num').each(function(i, val) {
         $(this).html((i+1).toString());
     });
     $('.entry-num-draw').html('-');
+
+    // Automatically make winning numbers bold
+    let metrics = ['micro_acc', 'macro_acc', 'bleu_1', 'bleu_4'];
+    $.each(metrics, function(i, val) {
+        let _array = [];
+        let metric_elems = $('.'+val);
+        metric_elems.each(function () {
+            _array.push($(this).html());
+        });
+        let max_val = Math.max.apply(Math, _array);
+
+        metric_elems.each(function () {
+            if ($(this).html() == max_val) {
+                $(this).addClass('font-weight-bold');
+            }
+        });
+    });
 });
 </script>
 
